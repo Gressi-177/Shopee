@@ -4,6 +4,7 @@ import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { AuthResponse } from 'src/types/auth.type'
 import { clearLS, getAccessTokenFormLS, setAccessTokenToLS, setProfileToLS } from './auth'
 import path from 'src/constants/path'
+import { URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/apis/auth.api'
 
 class Http {
   instance: AxiosInstance
@@ -35,13 +36,14 @@ class Http {
     this.instance.interceptors.response.use(
       (response) => {
         const { url } = response.config
-        if (url === path.login || url === path.register) {
+        console.log(url)
+        if (url === URL_LOGIN || url === URL_REGISTER) {
           const data = response.data as AuthResponse
 
           this.accessToken = data.data.access_token
           setAccessTokenToLS(this.accessToken)
           setProfileToLS(data.data.user)
-        } else if (url === path.logout) {
+        } else if (url === URL_LOGOUT) {
           this.accessToken = ''
           clearLS()
         }
