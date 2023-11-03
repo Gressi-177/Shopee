@@ -3,7 +3,6 @@ import { toast } from 'react-toastify'
 import HttpStatusCode from 'src/constants/httpStatusCode.enum'
 import { AuthResponse } from 'src/types/auth.type'
 import { clearLS, getAccessTokenFormLS, setAccessTokenToLS, setProfileToLS } from './auth'
-import path from 'src/constants/path'
 import { URL_LOGIN, URL_LOGOUT, URL_REGISTER } from 'src/apis/auth.api'
 
 class Http {
